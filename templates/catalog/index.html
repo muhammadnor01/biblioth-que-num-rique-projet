@@ -1,0 +1,32 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Bienvenue dans la bibliothèque numérique</h2>
+    <div class="hero">
+
+
+    <img src="{% static 'image/accueil.jpg' %}"
+       alt="Bibliothèque"
+       style="width:100%; max-height:400px; object-fit:cover; border-radius:10px;">
+      <div class="hero-text">
+<p>
+  Accédez à des milliers de livres numériques, gérez vos emprunts
+  et consultez vos lectures en ligne.
+</p>
+<h2>Nouveautés</h2>
+<ul>
+  {% for b in new_books %}
+    <li><a href="{% url 'book_detail' b.pk %}">{{ b.title }}</a></li>
+  {% empty %}
+    <li>Aucun livre</li>
+  {% endfor %}
+</ul>
+
+<h2>Récents</h2>
+<ul>
+  {% for b in recent %}
+    <li><a href="{% url 'book_detail' b.pk %}">{{ b.title }}</a></li>
+  {% endfor %}
+</ul>
+{% endblock %}

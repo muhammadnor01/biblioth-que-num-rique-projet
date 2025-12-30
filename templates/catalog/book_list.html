@@ -1,0 +1,24 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h2>Catalogue</h2>
+<form method="get">
+  <input type="text" name="q" placeholder="Recherche..." value="{{ q }}">
+  <button type="submit">Rechercher</button>
+</form>
+<ul>
+  {% for book in books %}
+    <li>
+      <a href="{% url 'book_detail' book.pk %}">{{ book.title }}</a>
+      - Dispo: {{ book.available_copies }}/{{ book.total_copies }}
+    </li>
+  {% empty %}
+    <li>Pas de livres trouvés.</li>
+  {% endfor %}
+</ul>
+{% if book.cover %}
+    <img src="{{ book.cover.url }}" width="100">
+{% else %}
+    <p>Pas d’image</p>
+{% endif %}
+
+{% endblock %}

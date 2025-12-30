@@ -1,0 +1,11 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h2>Mes emprunts</h2>
+<ul>
+  {% for loan in loans %}
+    <li>{{ loan.book.title }} — Emprunté le {{ loan.borrowed_at.date }} — Retour avant {{ loan.due_date.date }} {% if loan.is_overdue %} <strong>(Retard)</strong>{% endif %}</li>
+  {% empty %}
+    <li>Vous n'avez pas d'emprunt actif.</li>
+  {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h2>Demandes & Emprunts</h2>
+<h3>Emprunts en cours</h3>
+<ul>
+  {% for loan in loans %}
+    <li>{{ loan.book.title }} — {{ loan.borrower.username }} — dû {{ loan.due_date.date }}</li>
+  {% endfor %}
+</ul>
+
+<h3>Réservations</h3>
+<ul>
+  {% for r in reservations %}
+    <li>{{ r.book.title }} — réservé par {{ r.user.username }} le {{ r.reserved_at.date }}</li>
+  {% endfor %}
+</ul>
+{% endblock %}

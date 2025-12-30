@@ -1,0 +1,38 @@
+{% load static %}
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>Bibliothèque Numérique</title>
+  <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+  <header>
+    <h1><a href="{% url 'index' %}">Bibliothèque Numérique</a></h1>
+    <nav>
+      <a href="{% url 'book_list' %}">Catalogue</a>
+      {% if user.is_authenticated %}
+        <a href="{% url 'dashboard' %}">Mon compte</a>
+        <a href="{% url 'my_loans' %}">Mes emprunts</a>
+        <a href="{% url 'logout' %}">Déconnexion</a>
+      {% else %}
+        <a href="{% url 'login' %}">Connexion</a>
+        <a href="{% url 'signup' %}">Inscription</a>
+      {% endif %}
+    </nav>
+  </header>
+  <main>
+    {% if messages %}
+      <ul class="messages">
+        {% for m in messages %}
+          <li class="msg {{ m.tags }}">{{ m }}</li>
+        {% endfor %}
+      </ul>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+  <footer>
+    <p>Bibliothèque Numerique — Université de Maroua</p>
+  </footer>
+</body>
+</html>

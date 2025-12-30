@@ -1,0 +1,12 @@
+{% extends 'catalog/base.html' %}
+{% block content %}
+<h2>Tableau de bord</h2>
+<p>Bonjour {{ request.user.first_name }} ({{ profile.role }})</p>
+<ul>
+  <li><a href="{% url 'my_loans' %}">Mes emprunts</a></li>
+  <li><a href="{% url 'my_reservations' %}">Mes réservations</a></li>
+  {% if profile.role in 'biblio admin' %}
+    <li><a href="{% url 'borrow_requests' %}">Gérer demandes</a></li>
+  {% endif %}
+</ul>
+{% endblock %}
